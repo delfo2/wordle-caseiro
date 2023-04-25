@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
+:root {
+    --background: #14161C;
+    --dark-grey: #585858;
+    --key-background: #818384;
+    --key-background-hover: #757575;
+    --key-color: #FFF;
+
+    --font-size: 1rem;
+    --primary-font: 'Inter', sans-serif;
+}
+
+.advinha {
+    background-color: var(--background);
+}
+
+.advinha__cabecalho {
+    align-items: center;
+    border-bottom: 1px var(--dark-grey) solid;
+    display: flex;
+    height: 80px;
+    padding-left: 5%;
+}
+
+.advinha__conteudo {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.advinha__conteudo-tabua {
+    margin: 1rem 0;
+}
+
+.advinha__conteudo-tabua tr td {
+    border: 1px var(--dark-grey) solid;
+    color: var(--key-color);
+    display: inline-block;
+    height: 45px;
+    margin: 2px 1px;
+    width: 45px;
+}
+
+.advinha__conteudo-teclado div button {
+    border: none;
+    background-color: var(--key-background);
+    color: var(--key-color);
+    font-size: var(--font-size);
+    font-family: var(--primary-font);
+    margin: 2px;
+    height: 38px;
+    width: 33px;
+}
+.advinha__conteudo-teclado div button:hover,
+.advinha__conteudo-teclado div button:focus {
+    background-color: var(--key-background-hover);
+}
+
+.advinha__conteudo-teclado div {
+    display: flex;
+    justify-content: center;
+}
+
+#btnEnter {
+    width: 60px;
+}
+
+#btnDelete{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 40px;
+}
