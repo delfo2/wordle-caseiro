@@ -39,8 +39,13 @@
     border: 1px var(--dark-grey) solid;
     color: var(--key-color);
     display: inline-block;
+    font-size: var(--font-size);
+    font-family: var(--primary-font);
+    line-height: 40px;
     height: 45px;
     margin: 2px 1px;
+    vertical-align: middle;
+    text-align: center;
     width: 45px;
 }
 
