@@ -1,3 +1,4 @@
 import { randomizer } from "./services/randomizer.js";
 
-randomizer();
+const randomWord = await randomizer();
+console.log(randomWord);
