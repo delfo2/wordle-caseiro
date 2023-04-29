@@ -79,3 +79,13 @@
     justify-content: center;
     width: 40px;
 }
+
+.chute__invalido {
+    background-color: #585858;
+}
+.chute__valido {
+    background-color: #B59F3B;
+}
+.chute__correto {
+    background-color: #538D4E;
+}
