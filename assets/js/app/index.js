@@ -5,5 +5,10 @@ import { randomizer } from "./services/randomizer.js";
 const randomWord = await randomizer();
 console.log(randomWord);
 
-Toastify({text: `Dica: ${randomWord.palavra.slice(randomWord.palavra.lenght, 1).toUpperCase()}`, position: "center" , newWindow: true, duration: 10000}).showToast();
+Toastify({
+    text: `Dica: ${randomWord.palavra.slice(randomWord.palavra.lenght, 1).toUpperCase()}`,
+    position: "center" ,
+    newWindow: true, duration: 10000})
+    .showToast();
+
 listenKeyboard(checker, randomWord.palavra);
