@@ -1,5 +1,4 @@
 const tabuas = document.querySelectorAll('[data-tabua]');
-const mensagem = document.querySelector('[data-texto=""]');
 let index = 0;
 let userWord = '';
 let stage = 1;
@@ -12,7 +11,6 @@ const updateStage = () => {
     allowIndex += 5;
     stage += 1;
     paintIndexStart += 5;
-    mensagem.textContent = `${mensagem.textContent} / stage atual: ${stage}`;
 }
 
 const updateIndex = () => {
@@ -59,10 +57,11 @@ export const addKey = (key) => {
         updateIndex();
     } else {
         if(stage === 7) {
-            mensagem.textContent = 'Você chegou ao fim do jogo.';
+            Toastify({text: "Você chegou ao fim do jogo.", position: "center" , newWindow: true, duration: 5000}).showToast();
             return;
         }
-        mensagem.textContent = 'limite atingido.';
+        Toastify({text: "limite atingido.", position: "center" , newWindow: true, duration: 5000}).showToast();
+        
     }
 }
 
@@ -72,21 +71,27 @@ export const removeKey = () => {
         subractIndex();
         tabuas[index].textContent = '';
         userWord = userWord.slice(0, userWord.length - 1);
-    } else {mensagem.textContent = 'exclusão não permitida.';}
+    } else {
+        Toastify({text: "exclusão não permitida.", position: "center" , newWindow: true, duration: 5000}).showToast();
+    }
 }
 
 export const check = (checkerFn, randomWord) => {
     const canCheck = index % 5 === 0 && stage < 7 && index > 0 && userWord.length > 0;
     if(canCheck) {
         if(checkerFn(userWord, randomWord)) {
-            mensagem.textContent = 'você acertou a palavra. Fim de Jogo.';
+            Toastify({text: "você acertou a palavra. Fim de Jogo.", position: "center" , newWindow: true, duration: 5000}).showToast();
             userWord = '';
             stage = 7;
         } else {
-            mensagem.textContent = `você errou a palavra.`;
             userWord = '';
+            Toastify({text: "você errou a palavra.", position: "center" , newWindow: true, duration: 5000}).showToast();    
         }
         paintWords(randomWord);
         updateStage();
+    }
+    if(stage >= 7) {
+        Toastify({text: `A palavra era: ${randomWord}`, position: "center" , newWindow: true, duration: 10000}).showToast();    
+
     }
 }
