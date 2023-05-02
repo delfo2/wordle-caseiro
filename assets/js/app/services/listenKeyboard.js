@@ -10,7 +10,7 @@ const hasAccent = key => {
     return regEx.test(key);
 }
 export const listenKeyboard = (checkerFn, randomWord) => {
-    const isValidy = (e) => {
+    const isValidy = (e, virtualKeys = false) => {
         if(isLetter(e)) {
             addKey(e);
         }
@@ -21,7 +21,7 @@ export const listenKeyboard = (checkerFn, randomWord) => {
             removeKey();
         }
         if(e.toLowerCase() === 'enter') {
-            check(checkerFn, randomWord);
+            check(checkerFn, randomWord, teclado);
         }
     }
     window.addEventListener('keydown', e => {
@@ -33,7 +33,7 @@ export const listenKeyboard = (checkerFn, randomWord) => {
             isValidy(e.target.dataset.btn);
             return;
         }
-        isValidy(e.target.textContent.toLowerCase());
+        isValidy(e.target.textContent.toLowerCase(), true);
     })
 };
 

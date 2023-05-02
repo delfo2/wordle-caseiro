@@ -1,6 +1,9 @@
+import { paintKeys } from "./paintKeys.js";
+
 const tabuas = document.querySelectorAll('[data-tabua]');
 let index = 0;
 let userWord = '';
+let allUserWord = '';
 let stage = 1;
 let allowIndex = 5;
 let paintIndexStart = 0;
@@ -49,6 +52,7 @@ export const addKey = (key) => {
 
     if(canUserWrite) {
         userWord += key;
+        allUserWord += key;
         tabuas[index].textContent = key.toUpperCase();        
         updateIndex();
     }
@@ -69,9 +73,12 @@ export const removeKey = () => {
     }
 }
 
-export const check = (checkerFn, randomWord) => {
+export const check = (checkerFn, randomWord, virtualKeys = false) => {
     const canCheck = index % 5 === 0 && stage < 7 && index > 0 && userWord.length > 0;
     if(canCheck) {
+        if(virtualKeys) {
+            paintKeys(virtualKeys, allUserWord, userWord, randomWord);
+        }
         if(checkerFn(userWord, randomWord)) {
             Toastify({
                 text: "você acertou a palavra. Fim de Jogo.",
