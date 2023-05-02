@@ -22,10 +22,11 @@ const subractIndex = () => {
 
 const paintWords = (randomWord) => {
     let letterPosition = 0;
+    randomWord = randomWord.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
     let arr = randomWord.split('');
 
     for(let i = paintIndexStart; i < index; i++) {
-        let trWord = tabuas[i].textContent;
+        let trWord = tabuas[i].textContent.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
         let trCss = tabuas[i].classList;
 
         arr.forEach(letter => {

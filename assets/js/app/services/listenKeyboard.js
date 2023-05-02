@@ -1,4 +1,5 @@
 import { addKey, check, removeKey } from "../update/addKey.js";
+const teclado = document.querySelector('[data-teclado=""]');
 
 const isLetter = key => {
     const regEx = new RegExp(/^[a-z]$/g);
@@ -9,19 +10,30 @@ const hasAccent = key => {
     return regEx.test(key);
 }
 export const listenKeyboard = (checkerFn, randomWord) => {
-    window.addEventListener('keydown', e => {
-        if(isLetter(e.key)) {
-            addKey(e.key);
+    const isValidy = (e) => {
+        if(isLetter(e)) {
+            addKey(e);
         }
-        if(hasAccent(e.key)) {
-            addKey(e.key);
+        if(hasAccent(e)) {
+            addKey(e);
         }
-        if(e.key === 'Backspace' || e.key === 'Delete') {
+        if(e.toLowerCase() === 'backspace' || e.toLowerCase() === 'delete') {
             removeKey();
         }
-        if(e.key === 'Enter') {
+        if(e.toLowerCase() === 'enter') {
             check(checkerFn, randomWord);
         }
+    }
+    window.addEventListener('keydown', e => {
+        isValidy(e.key);
+    })
+    teclado.addEventListener('click', (e) => {
+        if(e.target.dataset.btn) {
+            console.log(e.target.dataset.btn);
+            isValidy(e.target.dataset.btn);
+            return;
+        }
+        isValidy(e.target.textContent.toLowerCase());
     })
 };
 
