@@ -1,6 +1,8 @@
 import { paintKeys } from "./paintKeys.js";
 
 const tabuas = document.querySelectorAll('[data-tabua]');
+const btnReset = document.querySelector('[data-btn="replay"]');
+
 let index = 0;
 let userWord = '';
 let allUserWord = '';
@@ -100,5 +102,26 @@ export const check = (checkerFn, randomWord, virtualKeys = false) => {
         Toastify({text: `A palavra era: ${randomWord}`,
         position: "center" , newWindow: true, duration: 1000})
         .showToast();
+        btnReset.style.display = 'block';
+        document.querySelector('[data-teclado=""]').style.display = 'none';
     }
+}
+
+export const restartGame = () => {
+    index = 0;
+    userWord = '';
+    allUserWord = '';
+    stage = 1;
+    allowIndex = 5;
+    paintIndexStart = 0;
+    btnReset.style.display = 'none';
+    document.querySelector('[data-teclado=""]').style.display = 'block';
+    tabuas.forEach(tabua => {
+        tabua.textContent = '';
+        while(tabua.classList.length > 0) {
+            for (let index = 0; index < tabua.classList.length + 1; index++) {
+                tabua.classList.remove(tabua.classList[index]);
+            }
+        }
+    })
 }

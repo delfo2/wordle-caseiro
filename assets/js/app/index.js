@@ -1,14 +1,30 @@
 import { checker } from "./services/checker.js";
-import { listenKeyboard } from "./services/listenKeyboard.js";
+import { clearKeyBoard, listenKeyboard, updateRandomWord } from "./services/listenKeyboard.js";
 import { randomizer } from "./services/randomizer.js";
+import { restartGame } from "./update/addKey.js";
 
-const randomWord = await randomizer();
-console.log(randomWord);
+const btnReset = document.querySelector('[data-btn="replay"]');
+const initListen = listenKeyboard;
+let randomWord = '';
 
-Toastify({
-    text: `Dica: ${randomWord.palavra.slice(randomWord.palavra.lenght, 1).toUpperCase()}`,
-    position: "center" ,
-    newWindow: true, duration: 10000})
-    .showToast();
+const generateNewWord = async () => {
+    randomWord = await randomizer();
+    console.log(randomWord);
+    
+    updateRandomWord(randomWord.palavra);
 
-listenKeyboard(checker, randomWord.palavra);
+    Toastify({
+        text: `Dica: ${randomWord.palavra.slice(randomWord.palavra.lenght, 1).toUpperCase()}`,
+        position: "center" ,
+        newWindow: true, duration: 10000})
+        .showToast();
+}
+
+generateNewWord();
+initListen(checker);
+
+btnReset.addEventListener('click', () => {
+    restartGame();
+    clearKeyBoard();
+    generateNewWord();
+})
